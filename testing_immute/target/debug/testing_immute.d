@@ -1,0 +1,1 @@
+/home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/testing_immute/target/debug/testing_immute: /home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/testing_immute/src/main.rs
