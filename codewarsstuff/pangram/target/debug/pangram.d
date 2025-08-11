@@ -1,0 +1,1 @@
+/home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/codewarsstuff/pangram/target/debug/pangram: /home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/codewarsstuff/pangram/src/main.rs
