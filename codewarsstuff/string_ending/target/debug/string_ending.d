@@ -1,0 +1,1 @@
+/home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/codewarsstuff/string_ending/target/debug/string_ending: /home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/codewarsstuff/string_ending/src/main.rs
