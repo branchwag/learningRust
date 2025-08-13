@@ -1,11 +1,11 @@
-fn quicksort(arr: &mut [i32]) {
+fn quicksort(arr: &mut [i8]) {
     if arr.len() <= 1 {
         return;
     }
     qsort(arr, 0, arr.len() - 1);
 }
 
-fn qsort(arr: &mut [i32], first: usize, last: usize) {
+fn qsort(arr: &mut [i8], first: usize, last: usize) {
     let split = partition(arr, first, last);
     
     if first < split {
@@ -17,7 +17,7 @@ fn qsort(arr: &mut [i32], first: usize, last: usize) {
     }
 }
 
-fn partition(arr: &mut [i32], first: usize, last: usize) -> usize {
+fn partition(arr: &mut [i8], first: usize, last: usize) -> usize {
     let pivot = arr[(first + last) / 2];
     let mut i = first.wrapping_sub(1); //handle underflow
     let mut j = last + 1;
