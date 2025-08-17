@@ -1,0 +1,1 @@
+/home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/ownership_testing/target/debug/ownership_testing: /home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/ownership_testing/src/main.rs
