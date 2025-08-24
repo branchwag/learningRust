@@ -1,0 +1,1 @@
+/home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/other_shenanigans/nqueens/target/debug/nqueens: /home/whiterabbit/CodingStuff/Rustin/the_rust_programming_language/other_shenanigans/nqueens/src/main.rs
