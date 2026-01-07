@@ -1,0 +1,11 @@
+# Rust build artifacts (any depth)
+/target/
+**/target/
+
+# Editor / OS junk
+.DS_Store
+.idea/
+.vscode/
+
+# Optional
+*.rs.bk
