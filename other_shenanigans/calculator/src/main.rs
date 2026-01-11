@@ -144,17 +144,19 @@ fn format_number(n: f64) -> String {
 impl eframe::App for CalculatorApp {
     fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         egui::CentralPanel::default().show(ctx, |ui| {
-            ui.vertical_centered(|ui| {
+            ui.vertical(|ui| {
                 ui.add_space(10.0);
 
                 // Display
-                ui.add(
-                    egui::TextEdit::singleline(&mut self.display)
-                        .font(egui::TextStyle::Heading)
-                        .desired_width(280.0)
-                        .interactive(false)
-                        .frame(true),
-                );
+                ui.horizontal(|ui| {
+                    ui.add(
+                        egui::TextEdit::singleline(&mut self.display)
+                            .font(egui::TextStyle::Heading)
+                            .desired_width(260.0)
+                            .interactive(false)
+                            .frame(true),
+                    );
+                });
 
                 ui.add_space(10.0);
 
@@ -171,7 +173,10 @@ impl eframe::App for CalculatorApp {
                         {
                             self.clear_entry();
                         }
-                        if ui.add_sized([65.0, 50.0], egui::Button::new("⌫")).clicked() {
+                        if ui
+                            .add_sized([65.0, 50.0], egui::Button::new("Backspace"))
+                            .clicked()
+                        {
                             self.backspace();
                         }
                         if ui.add_sized([65.0, 50.0], egui::Button::new("÷")).clicked() {
