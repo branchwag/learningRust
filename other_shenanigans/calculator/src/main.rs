@@ -152,13 +152,13 @@ impl eframe::App for CalculatorApp {
                     ui.add(
                         egui::TextEdit::singleline(&mut self.display)
                             .font(egui::TextStyle::Heading)
-                            .desired_width(260.0)
+                            .desired_width(265.0)
                             .interactive(false)
                             .frame(true),
                     );
                 });
 
-                ui.add_space(10.0);
+                ui.add_space(20.0);
 
                 // Button grid
                 ui.vertical(|ui| {
