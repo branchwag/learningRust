@@ -149,10 +149,16 @@ impl eframe::App for CalculatorApp {
 
                 // Display
                 ui.horizontal(|ui| {
+                    let button_width = 65.0;
+                    let num_buttons = 4.0;
+                    let spacing = ui.spacing().item_spacing.x;
+                    let total_width =
+                        (button_width * num_buttons) + (spacing * (num_buttons - 1.0));
+
                     ui.add(
                         egui::TextEdit::singleline(&mut self.display)
                             .font(egui::TextStyle::Heading)
-                            .desired_width(265.0)
+                            .desired_width(total_width)
                             .interactive(false)
                             .frame(true),
                     );
