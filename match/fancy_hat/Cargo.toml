@@ -1,0 +1,9 @@
+[package]
+name = "fancy_hat"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rand = "0.8"
+crossterm = "0.27"
+unicode-width = "0.1"
