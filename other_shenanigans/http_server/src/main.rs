@@ -5,7 +5,12 @@ use std::{net::TcpListener, thread};
 fn handle_client(mut stream: TcpStream) {
     let mut buffer = [0; 1024];
     if let Ok(_) = stream.read(&mut buffer) {
-        let response = "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\nHello, World!";
+        let body = "Hello, world!";
+        let response = format!(
+            "HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: {}\r\n\r\n{}",
+            body.len(),
+            body
+        );
         let _ = stream.write(response.as_bytes());
         let _ = stream.flush();
     }
