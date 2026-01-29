@@ -1,0 +1,2 @@
+use trunk serve instead trunk serve --open or pain will ensure :)
+dunno why this page just says 'If you are using Windows' when talking about that problem because I am using Arch and still encountering: https://book.leptos.dev/getting_started/index.html

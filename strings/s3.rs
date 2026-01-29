@@ -5,5 +5,5 @@ fn main() {
     let s3 = s1 + &s2;
 
     println!("{}", s3);
-    println!("{}", s1);
+    println!("{}", &s1);
 }
