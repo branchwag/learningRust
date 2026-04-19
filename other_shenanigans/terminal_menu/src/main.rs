@@ -1,9 +1,10 @@
 use crossterm::{
-    event::{self, poll, Event, KeyCode},
+    cursor::MoveTo,
+    event::{self, Event, KeyCode, poll},
     execute,
-    terminal::{disable_raw_mode, enable_raw_mode, Clear, ClearType},
+    terminal::{Clear, ClearType, disable_raw_mode, enable_raw_mode},
 };
-use std::io::{stdout, Write};
+use std::io::{Write, stdout};
 use std::time::Duration;
 
 fn main() -> std::io::Result<()> {
@@ -61,17 +62,20 @@ fn main() -> std::io::Result<()> {
 
 fn draw_menu_interactive(items: &[&str], selected: usize) -> std::io::Result<()> {
     let mut stdout = stdout();
-    execute!(stdout, Clear(ClearType::All))?;
+    execute!(stdout, Clear(ClearType::All), MoveTo(0, 0))?;
 
     for (i, item) in items.iter().enumerate() {
         if i == selected {
-            println!("> {}", item);
+            write!(stdout, "> {}\r\n", item)?;
         } else {
-            println!("  {}", item);
+            write!(stdout, "  {}\r\n", item)?;
         }
     }
 
-    println!("\nUse arrow keys to navigate, Enter to select, Esc to quit");
+    write!(
+        stdout,
+        "\r\nUse arrow keys to navigate, Enter to select, Esc to quit\r\n"
+    )?;
     stdout.flush()?;
     Ok(())
 }
@@ -106,7 +110,10 @@ fn draw_menu_simple(items: &[&str]) -> std::io::Result<()> {
                         return Ok(());
                     }
                     Ok(_) | Err(_) => {
-                        println!("Invalid choice. Please enter a number between 1 and {}, or 'q' to quit.", items.len());
+                        println!(
+                            "Invalid choice. Please enter a number between 1 and {}, or 'q' to quit.",
+                            items.len()
+                        );
                     }
                 }
             }
