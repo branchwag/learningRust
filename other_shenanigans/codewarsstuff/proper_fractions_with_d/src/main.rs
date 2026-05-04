@@ -18,8 +18,8 @@ fn proper_fractions(d: u64) -> u64 {
 
     //try possible factors
     while p * p <= n {
-        if n % p == 0 {
-            while n % p == 0 {
+        if n.is_multiple_of(p) {
+            while n.is_multiple_of(p) {
                 n /= p;
             }
 

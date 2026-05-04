@@ -17,7 +17,7 @@ fn fusc(n: u32) -> u32 {
     match n {
         0 => 0,
         1 => 1,
-        _ if n % 2 == 0 => fusc(n / 2),
+        _ if n.is_multiple_of(2) => fusc(n / 2),
         _ => fusc(n / 2) + fusc(n / 2 + 1),
     }
 }
