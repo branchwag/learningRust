@@ -11,7 +11,10 @@
 // good, but going with bitmask solution instead
 //
 fn sudoku(puzzle: &mut [[u8; 9]; 9]) {
-    let mut rows = [0u16; 9];
+    //2D array - row of 9 u8 values
+    //& - reference. Borrow, don't take ownership
+    let mut rows = [0u16; 9]; //create an array of 9 ints, making each element type u16 so we can
+    //hold up to the number 9
     let mut cols = [0u16; 9];
     let mut boxes = [0u16; 9];
 
