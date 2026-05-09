@@ -1,8 +1,10 @@
 struct Stack<T> {
+    //what fields exist, what types they hold
     items: Vec<T>,
 }
 
 impl<T> Stack<T> {
+    //what you can do with a Stack
     fn new() -> Self {
         Stack { items: Vec::new() }
     }
@@ -23,7 +25,7 @@ impl<T> Stack<T> {
         self.items.is_empty()
     }
 
-    fn len(&self) -> usize {
+    fn size(&self) -> usize {
         self.items.len()
     }
 }
@@ -35,8 +37,8 @@ fn main() {
     stack.push(2);
     stack.push(3);
 
-    println!("{:?}", stack.pop());
-    println!("{:?}", stack.peek());
-    println!("Length: {}", stack.len());
+    println!("Pop: {:?}", stack.pop());
+    println!("Peek: {:?}", stack.peek());
+    println!("Size: {}", stack.size());
     println!("Is the stack empty? {}", stack.is_empty());
 }
