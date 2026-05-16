@@ -7,8 +7,13 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
+    fn exploration() {
         let result = add(2, 2);
         assert_eq!(result, 4);
+    }
+
+    #[test]
+    fn another() {
+        panic!("Make this test fail");
     }
 }
