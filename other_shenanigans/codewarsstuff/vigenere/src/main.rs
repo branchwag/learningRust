@@ -52,6 +52,11 @@ pub fn decipher_key(ciphertext: &str, key_length: usize) -> String {
         .collect()
 }
 
+fn main() {
+    println!("{}", decipher_key("HFNIMVOSNA", 6));
+    println!("{}", decipher_key("LXFOPVEFRNHR", 5));
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
