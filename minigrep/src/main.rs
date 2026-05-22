@@ -8,6 +8,10 @@ struct Config {
 
 impl Config {
     fn new(args: &[String]) -> Config {
+        if args.len() < 3 {
+            //program, searchterm, file
+            panic!("not enough arguments");
+        }
         let query = args[1].clone();
         let file_path = args[2].clone();
 
