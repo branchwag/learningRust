@@ -48,7 +48,7 @@ fn run(config: Config) -> Result<(), Box<dyn Error>> {
 fn main() {
     let args: Vec<String> = env::args().collect();
     let config = Config::build(&args).unwrap_or_else(|err| {
-        println!("Problem parsing arguments: {err}");
+        eprintln!("Problem parsing arguments: {err}");
         process::exit(1);
     });
 
@@ -57,7 +57,7 @@ fn main() {
 
     if let Err(e) = run(config) {
         //using if let to check if run returns error
-        println!("Application error: {e}");
+        eprintln!("Application error: {e}");
         process::exit(1);
     }
 }
