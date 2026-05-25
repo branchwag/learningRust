@@ -1,0 +1,6 @@
+pacman
+hangman 
+rock paper scissors
+conway
+pong
+
