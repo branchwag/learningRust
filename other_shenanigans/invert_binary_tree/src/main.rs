@@ -21,7 +21,7 @@ impl TreeNode {
 fn invert_tree(root: Option<Rc<RefCell<TreeNode>>>) -> Option<Rc<RefCell<TreeNode>>> {
     if let Some(node) = root.clone() {
         let mut n = node.borrow_mut();
-        let left = n.left.take();
+        let left = n.left.take(); //take moves a value out of an Option and leaves None behind
         let right = n.right.take();
         n.left = invert_tree(right);
         n.right = invert_tree(left);

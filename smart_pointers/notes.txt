@@ -1,0 +1,14 @@
+pointer - var that contains address in mem
+reference &- borrow the value they point to
+
+smart pointers - data structures w/ metadata
+implemented using structs
+	use Deref (ref or smart pointers) and Drop (goes out of scope) traits
+mostly OWN the data they point to
+different types of smart pointers:
+	Box<T> - allocating values on heap
+	Rc<T> - reference counting - allows data to have multiple owners. when no owners remain, clean up data
+	Ref<T> / Ref<Mut<T>, accessed through RefCell<T> - enforces borrowing rules at runtime instead of compile time
+
+interior mutability - an immuntaable type exposes an API for mutating an interior value
+
