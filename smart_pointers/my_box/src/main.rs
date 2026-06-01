@@ -12,7 +12,8 @@ impl<T> Deref for MyBox<T> {
     type Target = T;
 
     fn deref(&self) -> &Self::Target {
-        &self.0
+        //returns a reference
+        &self.0 //accesses the first value in a tuple struct
     }
 }
 
@@ -21,5 +22,5 @@ fn main() {
     let y = MyBox::new(x);
 
     assert_eq!(5, x);
-    assert_eq!(5, *y);
+    assert_eq!(5, *y); //end up with i32
 }
