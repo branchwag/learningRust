@@ -1,0 +1,21 @@
+RefCell
+single ownership over the data it holds
+Need to be able to mutate data - RefCell<T>
+Type that you can use in conjunction with an Rc<T> to work with this immutability restriction
+
+Interior mutability 
+allows you to mutate data when there are immutable references to that data
+
+invariants are enforced at runtime
+	- at any time you can have either one mutable reference or any number of immutable references but not both
+if you break these rules, the program will panic and exit
+
+
+Rc<T> enables multiple owners of the same data. Box<T> and RefCell<T> have single owners.
+
+Box<T> allows immutable or mutable borrows checked at compile time.
+
+Rc<T> - immutable borrows checked at compile time
+RefCell<T> - allows immuatble or mutable borrows checked at runtime
+
+
