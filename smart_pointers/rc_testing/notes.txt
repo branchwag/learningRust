@@ -1,0 +1,5 @@
+multiple ownership
+RC - referencecounting
+Rc<T> allocated some data on the heap for multiple parts of our program to read and we can't determine at compiletime which part will finish using the data last.
+
+data won't be cleaned up unless we have zero references to it
