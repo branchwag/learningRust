@@ -14,3 +14,5 @@ Because the value that Weak<T> references might have been dropped, to do anythin
 	call upgrade method on a Weak<T> instance, return Option<Rc<T>>
 		Some if Rc<T> value has not been dropped yet
 		None if the Rc<T> value has been dropped
+
+relationship from child to its parent should be a Weak reference

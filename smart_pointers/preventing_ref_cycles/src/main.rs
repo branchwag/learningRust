@@ -22,16 +22,40 @@ fn main() {
         children: RefCell::new(vec![]),    //no children
     });
 
-    println!("leaf parent = {:?}", leaf.parent.borrow().upgrade()); // None
+    println!(
+        "leaf strong = {}, weak = {}",
+        Rc::strong_count(&leaf), //1
+        Rc::weak_count(&leaf),   //0
+    );
+    {
+        let branch = Rc::new(Node {
+            value: 5,
+            parent: RefCell::new(Weak::new()), //no parent node
+            children: RefCell::new(vec![Rc::clone(&leaf)]), //leaf as one of its children
+        });
 
-    let branch = Rc::new(Node {
-        value: 5,
-        parent: RefCell::new(Weak::new()), //no parent node
-        children: RefCell::new(vec![Rc::clone(&leaf)]), //leaf as one of its children
-    });
+        //modding leaf to give it a Weak<Node> reference to its parent
+        *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
 
-    //modding leaf to give it a Weak<Node> reference to its parent
-    *leaf.parent.borrow_mut() = Rc::downgrade(&branch);
+        println!(
+            "branch strong = {}, weak = {}",
+            Rc::strong_count(&branch), //1
+            Rc::weak_count(&branch),   //1
+        );
+
+        println!(
+            "leaf strong = {}, weak = {}",
+            Rc::strong_count(&leaf), //2 bc branch now has a clone of the Rc<Node> of leaf stored
+            //in branch.children
+            Rc::weak_count(&leaf), //0
+        );
+    } //inner scope ends
 
     println!("leaf parent = {:?}", leaf.parent.borrow().upgrade());
+    //None
+    println!(
+        "leaf strong = {}, weak = {}",
+        Rc::strong_count(&leaf), //1
+        Rc::weak_count(&leaf,)   //0
+    );
 }
