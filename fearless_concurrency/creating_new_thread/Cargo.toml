@@ -1,0 +1,6 @@
+[package]
+name = "creating_new_thread"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]

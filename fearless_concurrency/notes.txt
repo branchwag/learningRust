@@ -1,0 +1,17 @@
+concurrent programming - different parts of a program execute independently 
+parallel programming - different parts of a program execute at the same time
+
+- create threads to run multiple pieces of code at the same time
+ex: web server responding to more than one request at the same time
+
+race conditions - threads are accessing data or resources in an inconsistent order
+deadlocks - two threads are waiting for each other
+
+Message-passing concurrency - where channels send messages between threads
+Shared-state concurrency - multiple threads have access to some piece of data
+
+executed program's code is run in a process
+OS manaages multiple processes at once
+Many OSes provide an API that the programming lang can call for creating new threads
+std lib 1:1 model of thread implementation
+	- one language thread = 1 os thread
