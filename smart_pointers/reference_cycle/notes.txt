@@ -1,0 +1,5 @@
+avoid ref cycles by having some references express ownership and some references don't
+so you can have cycles made up of some ownership relationships and some non-ownership relationships
+Only the owner relationships affect whether or not a value can be dropped
+
+ex - graphs made up of parent nodes and child nodes

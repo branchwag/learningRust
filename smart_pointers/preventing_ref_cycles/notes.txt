@@ -1,0 +1,16 @@
+Rc::clone increases the strong_count of an Rc<T> instance 
+	and an Rc<T> instance is only cleaned up if its strong_count is 0
+Strong references - how you can share ownership of an Rc<T> instance
+
+Can create a weak reference to the value within an Rc<T> instance by calling Rc::downgrade and passing a reference to the Rc<T>
+Weak references don't express an ownership relationship.
+	Their count doesn't affect when an Rc<T> instance is cleaned up. 
+	Wont cause a reference cycle because any cycle involving some weak references will be broken once the strong reference count of values involved is 0.
+
+Rc::downgrade, you get a smart pointer of type Weak<T>.
+	increases the weak_count by 1
+
+Because the value that Weak<T> references might have been dropped, to do anything with the value that a Weak<T> is pointing to, you must make sure the value still exists:
+	call upgrade method on a Weak<T> instance, return Option<Rc<T>>
+		Some if Rc<T> value has not been dropped yet
+		None if the Rc<T> value has been dropped
