@@ -1,0 +1,6 @@
+mutex - mutual exclusion
+allows only one thread to access some data at any given time
+
+To access data in a mutex, you must aquire lock. 
+lock - data structure that is part of the mutex that keeps track of who currently has exclusive access to the data
+When you are done with the data that the mutex guards, you must unlock the data so that other threads can acquire the lock
