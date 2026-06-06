@@ -4,7 +4,8 @@ use std::time::Duration;
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-
+    //creating multiple threads that all send values to the same receiver
+    let tx1 = tx.clone();
     thread::spawn(move || {
         let vals = vec![
             String::from("hi"),
@@ -14,12 +15,28 @@ fn main() {
         ];
 
         for val in vals {
+            tx1.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("more"),
+            String::from("messages"),
+            String::from("for"),
+            String::from("you"),
+        ];
+
+        for val in vals {
             tx.send(val).unwrap();
             thread::sleep(Duration::from_secs(1));
         }
     });
 
     for received in rx {
+        //treating rx as an iterator here
         println!("Got: {received}");
     }
+    //nondeterministic output
 }
