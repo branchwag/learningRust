@@ -1,21 +1,25 @@
 use std::sync::mpsc;
-//mpsc - multiple producer, single consumer
-//channels can have multiple sending ends that produce values
-//only one receiving end that consumes those values
 use std::thread;
+use std::time::Duration;
 
 fn main() {
     let (tx, rx) = mpsc::channel();
-    //tx - transmitter
-    //rx - receiver
 
-    thread::spawn(move || { //using move to move tx into the closure
-        let val = String::from("hi");
-        tx.send(val).unwrap();
-        //send method returns Result<T, E> 
-        //upwrap here will panic in case of an error
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("hi"),
+            String::from("from"),
+            String::from("the"),
+            String::from("thread"),
+        ];
 
-});
-        let received = rx.recv().unwrap();
+        for val in vals {
+            tx.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
+
+    for received in rx {
         println!("Got: {received}");
+    }
 }
