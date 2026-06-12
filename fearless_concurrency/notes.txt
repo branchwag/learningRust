@@ -15,3 +15,11 @@ OS manaages multiple processes at once
 Many OSes provide an API that the programming lang can call for creating new threads
 std lib 1:1 model of thread implementation
 	- one language thread = 1 os thread
+
+
+when the main thread of a Rust program completes, all spawned threads are shut down
+
+channel - used to send data from one thread to another
+	transmitter (start upstream) - call methods on the transmitter with the data you want to send 
+	receiver (end downstream) - another part checks the receiving end for arriving messages
+closed if either transmitter or receiver half is dropped
