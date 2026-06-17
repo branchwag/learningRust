@@ -9,7 +9,7 @@ fn main() {
 
     for _ in 0..10 {
         //create ten threads
-        let counter = Arc::clone(&counter);
+        let counter = Arc::clone(&counter); //immitable but we get a mutable ref to val inside
         let handle = thread::spawn(move || {
             //moves counter into thread
             let mut num = counter.lock().unwrap(); //acquires lock

@@ -1,0 +1,2 @@
+mutex provides interior mutability
+use Mutex to mutate contents inside an Arc

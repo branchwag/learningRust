@@ -23,3 +23,17 @@ channel - used to send data from one thread to another
 	transmitter (start upstream) - call methods on the transmitter with the data you want to send 
 	receiver (end downstream) - another part checks the receiving end for arriving messages
 closed if either transmitter or receiver half is dropped
+
+
+std::marker traits Send and Sync
+a market trait has no methods or associated items. Purpose is to mark a type as having some property
+Send - ownership of values of the type implementing Send can be transferred between threads
+(almost every Rust type implements Send)
+Arc does implement Send
+Sync marker trait - indicates that it is safe for the type implementing Sync to be referenced from multiple threads
+any type T implements Sync if &T (an immutable ref to T) implements Send
+
+
+The smart pointer Rc<T> does NOT implement Sync or Send.
+RefCell<T> and Cell<T> types don't implememt Sync. The implementation of borrow checking that RefCell<T> does at runtime is not thread-safe.
+The smart pointer Mutex<T> implements Sync
