@@ -4,7 +4,7 @@ fn main() {
     trpl::block_on(async {
         let (tx, mut rx) = trpl::channel();
 
-        let tx_fut = async {
+        let tx_fut = async move {
             //completed once finishing sleeping after sending last msg in vals
             let vals = vec![
                 String::from("hi"),
