@@ -1,0 +1,12 @@
+Do something else while we wait for long-running processes
+parallelism - having multiple tasks done in tandem
+concurrency - switching tasks
+
+futures, streams, and the async/await syntax
+Future - value that may not be ready now but will become ready at some point in the future
+you await a future
+check by polling
+
+execute async functions with a runtime
+Tokio most widely used async runtime
+
