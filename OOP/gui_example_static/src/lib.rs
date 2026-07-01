@@ -4,20 +4,23 @@ pub trait Draw {
     fn draw(&self);
 }
 
-//now any type can implement this trait
-//
-
-pub struct Screen {
-    pub components: Vec<Box<dyn Draw>>, //trait object - dispatched dynamically
+pub struct Screen<T: Draw> {
+    //here screen is genric. Draw is resolved at compile time
+    pub components: Vec<T>, //every element in the vector must be the same concrete type/
+                            //T is a concrete type chosen at compile time
 }
 
-impl Screen {
+impl<T> Screen<T>
+where
+    T: Draw,
+{
     pub fn run(&self) {
         for component in self.components.iter() {
-            component.draw(); //doesnt know type at compile time, looks up right one in vtable
+            component.draw();
         }
     }
 }
+
 pub struct Button {
     pub width: u32,
     pub height: u32,
