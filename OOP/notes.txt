@@ -1,0 +1,5 @@
+impl blocks provide methods on structs and enums
+
+encapsulation - implementation details not accessible to code using object
+	pub keyword 
+	by default everything is provate
