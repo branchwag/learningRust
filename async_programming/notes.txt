@@ -10,3 +10,5 @@ check by polling
 execute async functions with a runtime
 Tokio most widely used async runtime
 
+CPU-bound - threads
+I/O bound - async
