@@ -12,7 +12,9 @@ impl Post {
     }
 
     pub fn add_text(&mut self, text: &str) {
-        self.content.push_str(text);
+        if self.state.as_ref().unwrap().can_add_text() {
+            self.content.push_str(text);
+        }
     }
 
     pub fn content(&self) -> &str {
@@ -45,6 +47,9 @@ trait State {
     fn content<'a>(&self, post: &'a Post) -> &'a str {
         ""
     }
+    fn can_add_text(&self) -> bool {
+        false
+    }
     fn reject(self: Box<Self>) -> Box<dyn State>;
 }
 
@@ -61,6 +66,10 @@ impl State for Draft {
 
     fn reject(self: Box<Self>) -> Box<dyn State> {
         self
+    }
+
+    fn can_add_text(&self) -> bool {
+        true
     }
 }
 
