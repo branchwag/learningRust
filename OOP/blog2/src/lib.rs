@@ -12,6 +12,7 @@ pub struct PendingReviewPost {
 
 impl Post {
     pub fn new() -> DraftPost {
+        //not returning self bc we want a DraftPost initially, not a Post
         DraftPost {
             content: String::new(),
         }

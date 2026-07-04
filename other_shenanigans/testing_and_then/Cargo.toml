@@ -1,0 +1,6 @@
+[package]
+name = "testing_and_then"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
