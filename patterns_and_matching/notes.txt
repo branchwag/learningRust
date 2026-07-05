@@ -3,3 +3,5 @@ match VALUE {
     PATTERN => EXPRESSION,
     PATTERN => EXPRESSION,
 }
+
+if let - shorter way to write the equivalent of a match that matches one case
