@@ -5,3 +5,7 @@ match VALUE {
 }
 
 if let - shorter way to write the equivalent of a match that matches one case
+
+patterns come in two forms:
+refutable - fail to match
+irrefutable - match
