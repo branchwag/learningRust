@@ -1,0 +1,11 @@
+trait - functionality that a particular type has
+	- can share with other types
+
+trait bounds - specify that a generic type can be any type that has certain behavior
+
+behavior is the methods we can call on that type
+
+ex:
+ NewsArticle struct - news story filed in particular location
+ SocialPost - 280 chars
+and we want to make a media agg lib that can display summaries of data from both
