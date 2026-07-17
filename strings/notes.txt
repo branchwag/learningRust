@@ -1,0 +1,5 @@
+str - actual string slice type (an unsized type)
+	dst - dynamically sized type
+	not possible to create a var 
+&str - reference to a str (more commonly used)
+	only stores starting pos and length
