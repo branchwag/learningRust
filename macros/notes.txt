@@ -1,0 +1,19 @@
+way of writing code that writes other code
+derive generates an implementation of various traits for you.
+
+macros can take variable number of params
+
+declarative macro - macro_rules! macros
+procedural macro - accept some code as an input, operate on that code, and produce some code as an output rather than matching against patterns
+As of Rust 1.96 in July 2026, procedural macros still must be defined in a dedicated proc-macro crate, and they cannot be used within the same crate that defines them.
+my_project/
+├── Cargo.toml
+├── my_library/
+│   ├── Cargo.toml
+│   └── src/lib.rs
+└── my_library_macros/
+    ├── Cargo.toml - [lib]
+proc-macro = true
+    └── src/lib.rs
+attribute-like macros -
+function-like macros - 
