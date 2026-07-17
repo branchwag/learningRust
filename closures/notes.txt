@@ -1,0 +1,8 @@
+three closure traits:
+Fn - read only (only borrows values immutably)
+FnMut - mutable borrow
+FnOnce - takes ownership(consumes something)
+
+
+
+move - capture variables by value instead of by reference
