@@ -12,7 +12,7 @@ fn handle_connection(mut stream: TcpStream) {
         .take_while(|line| !line.is_empty()) //end of hhtp = 2 newline chars
         .collect();
 
-    let status_line = "HTTP/1.1 200 OK\r\n\r\n";
+    let status_line = "HTTP/1.1 200 OK";
     let contents = fs::read_to_string("hello.html").unwrap();
     let length = contents.len();
 
