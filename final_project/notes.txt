@@ -1,0 +1,6 @@
+listen for tcp connections on a socket
+parse asmall number of http requests
+create a proper http response
+improve the throughput of our server with a thread pool
+
+
