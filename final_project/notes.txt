@@ -3,4 +3,10 @@ parse asmall number of http requests
 create a proper http response
 improve the throughput of our server with a thread pool
 
-
+many operating systems have a limit to the number of simultaneous open connections they can support; new connection attempts beyond that number will produce an error until some of the open connections are closed.
+	network socks are file descriptors
+		process - 1024 open file descriptors
+		modern - 4,096,65,535
+	tcp ephemeral ports (outbound connections - 16,000 - 60,000 per source IP)
+	kernel/network stack limits
+	app limit
