@@ -1,4 +1,4 @@
-use std::thread::JoinHandle;
+use std::thread::{JoinHandle, Thread};
 use std::{
     sync::{Arc, Mutex, mpsc},
     thread,
@@ -6,7 +6,7 @@ use std::{
 
 pub struct ThreadPool {
     workers: Vec<Worker>,
-    sender: mpsc::Sender<Job>,
+    sender: Option<mpsc::Sender<Job>>,
 }
 
 type Job = Box<dyn FnOnce() + Send + 'static>;
@@ -32,7 +32,10 @@ impl ThreadPool {
             workers.push(Worker::new(id, Arc::clone(&receiver)));
         }
 
-        ThreadPool { workers, sender }
+        ThreadPool {
+            workers,
+            sender: Some(sender),
+        }
     }
 
     pub fn spawn<F, T>(f: F) -> JoinHandle<T>
@@ -49,7 +52,21 @@ impl ThreadPool {
         F: FnOnce() + Send + 'static,
     {
         let job = Box::new(f);
-        self.sender.send(job).unwrap();
+        self.sender.as_ref().unwrap().send(job).unwrap();
+    }
+}
+
+//implementing the Drop trait to call join on each of the threads in the pool so that they can
+//finish the requests they're working on before closing
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        //dropping sender closes the channel
+        drop(self.sender.take());
+
+        for worker in self.workers.drain(..) {
+            println!("Shutting down worker {}", worker.id);
+            worker.thread.join().unwrap();
+        }
     }
 }
 
@@ -67,13 +84,19 @@ impl Worker {
             //asking the receiving end of the channel for a job
             //and running the job when it gets one
             loop {
-                let job = receiver.lock().unwrap().recv().unwrap();
-                //call lock to acquire mutex
-                //might fail if mutex is in poisoned state (thread panicked while holding
-                //lock)
-                //if we get lock, call rec to receive aa Job from the channel
-                println!("Worker {id} got a job; executing.");
-                job();
+                let message = receiver.lock().unwrap().recv();
+
+                match message {
+                    Ok(job) => {
+                        println!("Worker {id} got a job; executing.");
+                        job();
+                    }
+                    //expicitly breaking out of the loop when recv returns an error
+                    Err(_) => {
+                        println!("Worker {id} disconnected; shutting down.");
+                        break;
+                    }
+                }
             }
         });
 
