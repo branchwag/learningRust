@@ -9,7 +9,14 @@ pub struct ThreadPool {
     sender: mpsc::Sender<Job>,
 }
 
-struct Job;
+type Job = Box<dyn FnOnce() + Send + 'static>;
+// a job is just a closure
+// different closures have different concrete types (compiler-generated types)
+// use trait object dyn FnOnce() to erase concrete types
+// now the queue can hold any closure that can be called once
+// trait object dyn FnOnce() is unsized (Rust doesn't know how big it is at compile time)
+// so put it in a Boz so it has a known size (a pointer)
+// Send - safe to transfer between threads
 
 impl ThreadPool {
     pub fn new(size: usize) -> ThreadPool {
@@ -41,7 +48,8 @@ impl ThreadPool {
     where
         F: FnOnce() + Send + 'static,
     {
-        thread::spawn(f);
+        let job = Box::new(f);
+        self.sender.send(job).unwrap();
     }
 }
 
@@ -51,9 +59,22 @@ struct Worker {
 }
 
 impl Worker {
+    //Arc - shared ownership
+    //Mutex - safe shared access
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        let thread = thread::spawn(|| {
-            receiver;
+        let thread = thread::spawn(move || {
+            //need closure to loop forever,
+            //asking the receiving end of the channel for a job
+            //and running the job when it gets one
+            loop {
+                let job = receiver.lock().unwrap().recv().unwrap();
+                //call lock to acquire mutex
+                //might fail if mutex is in poisoned state (thread panicked while holding
+                //lock)
+                //if we get lock, call rec to receive aa Job from the channel
+                println!("Worker {id} got a job; executing.");
+                job();
+            }
         });
 
         Worker { id, thread }
